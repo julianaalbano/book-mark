@@ -1,5 +1,5 @@
 const db = require('../server/db');
-const { Book, ListType } = require('../server/db/models');
+const { Book, List } = require('../server/db/models');
 const axios = require('axios');
 
 async function seed() {
@@ -47,7 +47,7 @@ async function seed() {
 
   await Promise.all(
     listNameData.map(list => {
-      return ListType.create(list);
+      return List.create(list);
     })
   );
 

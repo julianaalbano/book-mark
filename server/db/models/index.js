@@ -1,12 +1,10 @@
 const Book = require('./book');
-const ListType = require('./listType');
+const List = require('./list');
 
-ListType.hasMany(Book);
-Book.belongsTo(ListType);
-
-// Book.belongsTo(ListType, { through: 'listId' });
+List.hasMany(Book);
+Book.belongsTo(List);
 
 module.exports = {
   Book,
-  ListType,
+  List,
 };

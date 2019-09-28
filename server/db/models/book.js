@@ -40,6 +40,7 @@ const Book = db.define('book', {
   },
   listId: {
     type: Sequelize.INTEGER,
+    allowNull: false,
   },
 });
 

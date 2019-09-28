@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const { ListType, Book } = require('../db/models');
+const { List, Book } = require('../db/models');
 module.exports = router;
 
 router.get('/', async (req, res, next) => {
   try {
-    const allLists = await ListType.findAll({
+    const allLists = await List.findAll({
       include: {
         model: Book,
       },
@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:listName', async (req, res, next) => {
   try {
-    const listwithBooks = await ListType.findOne({
+    const listwithBooks = await List.findOne({
       where: {
         name: req.params.listName,
       },

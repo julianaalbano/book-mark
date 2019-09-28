@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const { Book, ListType } = require('../db/models');
+const { Book, List } = require('../db/models');
 module.exports = router;
 
 router.get('/', async (req, res, next) => {
   try {
     const books = await Book.findAll({
       include: {
-        model: ListType,
+        model: List,
       },
     });
     res.json(books);
@@ -22,7 +22,7 @@ router.get('/:id', async (req, res, next) => {
         id: req.params.id,
       },
       include: {
-        model: ListType,
+        model: List,
       },
     });
     res.json(singleBook);
