@@ -6,8 +6,7 @@ const initialState = {
   popular: [],
   new: [],
   allLists: [],
-  booksInList: [],
-  author: [],
+  // booksInList: [],
   loading: true,
 };
 

@@ -12,12 +12,13 @@ class Books extends React.Component {
     super();
     this.state = {
       booksToRender: '',
-      bookList: [],
+      author: '',
     };
     this.handleClickAll = this.handleClickAll.bind(this);
     this.handleClickNew = this.handleClickNew.bind(this);
     this.handleClickPopular = this.handleClickPopular.bind(this);
     this.handleClickAllLists = this.handleClickAllLists.bind(this);
+    this.handleAuthor = this.handleAuthor.bind(this);
   }
   componentDidMount() {
     this.props.fetchAllBooks();
@@ -50,7 +51,23 @@ class Books extends React.Component {
     });
   }
 
+  async handleAuthor() {
+    await this.setState({
+      booksToRender: 'AUTHOR',
+      author: event.target.value,
+    });
+  }
+
   render() {
+    const authors = [];
+    const authorSet = new Set();
+    this.props.allBooks.map(book => {
+      if (!authorSet[book.author]) {
+        authorSet[book.author] = true;
+        authors.push(book.author);
+      }
+    });
+    const sortedAuthors = authors.sort();
     return (
       <div>
         <div>
@@ -59,19 +76,20 @@ class Books extends React.Component {
           <button type="button" onClick={this.handleClickAllLists}>
             Lists
           </button>
+          <p>Author</p>
+          <select onChange={this.handleAuthor}>
+            {sortedAuthors.map((author, index) => (
+              <option key={index} value={author}>
+                {author}
+              </option>
+            ))}
+          </select>
           {/* <select>
             <option value="volvo">Volvo</option>
             <option value="saab">Saab</option>
             <option value="mercedes">Mercedes</option>
             <option value="audi">Audi</option>
           </select> */}
-          <p>Author</p>
-          <select>
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
-          </select>
           <br />
           <button type="button" onClick={this.handleClickAll}>
             All
@@ -91,6 +109,20 @@ class Books extends React.Component {
               src="https://loading.io/spinners/ellipsis/lg.discuss-ellipsis-preloader.gif"
               className="loading-img"
             />
+          ) : this.state.booksToRender === 'AUTHOR' ? (
+            <div>
+              <h1>BY AUTHOR</h1>
+              <div id="book-map-container">
+                {this.props.allBooks.map(book =>
+                  book.author === this.state.author ? (
+                    <div>
+                      <p>{book.title}</p>
+                      <p>{this.props.allLists[book.listId].name}</p>
+                    </div>
+                  ) : null
+                )}
+              </div>
+            </div>
           ) : this.state.booksToRender === 'LIST' ? (
             <div>
               <h1>LIST</h1>

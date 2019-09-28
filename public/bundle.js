@@ -165,12 +165,13 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Books).call(this));
     _this.state = {
       booksToRender: '',
-      bookList: []
+      author: ''
     };
     _this.handleClickAll = _this.handleClickAll.bind(_assertThisInitialized(_this));
     _this.handleClickNew = _this.handleClickNew.bind(_assertThisInitialized(_this));
     _this.handleClickPopular = _this.handleClickPopular.bind(_assertThisInitialized(_this));
     _this.handleClickAllLists = _this.handleClickAllLists.bind(_assertThisInitialized(_this));
+    _this.handleAuthor = _this.handleAuthor.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -299,20 +300,60 @@ function (_React$Component) {
       return handleClickAllLists;
     }()
   }, {
+    key: "handleAuthor",
+    value: function () {
+      var _handleAuthor = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee5() {
+        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
+                return this.setState({
+                  booksToRender: 'AUTHOR',
+                  author: event.target.value
+                });
+
+              case 2:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
+
+      function handleAuthor() {
+        return _handleAuthor.apply(this, arguments);
+      }
+
+      return handleAuthor;
+    }()
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
+      var authors = [];
+      var authorSet = new Set();
+      this.props.allBooks.map(function (book) {
+        if (!authorSet[book.author]) {
+          authorSet[book.author] = true;
+          authors.push(book.author);
+        }
+      });
+      var sortedAuthors = authors.sort();
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "New York Times Bestsellers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         onClick: this.handleClickAllLists
-      }, "Lists"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Author"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "volvo"
-      }, "Volvo"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "saab"
-      }, "Saab"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "mercedes"
-      }, "Mercedes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "audi"
-      }, "Audi")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "Lists"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Author"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        onChange: this.handleAuthor
+      }, sortedAuthors.map(function (author, index) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: index,
+          value: author
+        }, author);
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         onClick: this.handleClickAll
       }, "All"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -324,7 +365,11 @@ function (_React$Component) {
       }, "New")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.loading ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: "https://loading.io/spinners/ellipsis/lg.discuss-ellipsis-preloader.gif",
         className: "loading-img"
-      }) : this.state.booksToRender === 'LIST' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "LIST"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }) : this.state.booksToRender === 'AUTHOR' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "BY AUTHOR"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "book-map-container"
+      }, this.props.allBooks.map(function (book) {
+        return book.author === _this2.state.author ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this2.props.allLists[book.listId].name)) : null;
+      }))) : this.state.booksToRender === 'LIST' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "LIST"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "book-map-container"
       }, this.props.allLists.map(function (list) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -543,8 +588,7 @@ var initialState = {
   popular: [],
   "new": [],
   allLists: [],
-  booksInList: [],
-  author: [],
+  // booksInList: [],
   loading: true
 }; // ACTION TYPES
 
@@ -788,7 +832,7 @@ var fetchNew = function fetchNew() {
 /*!*******************************!*\
   !*** ./client/store/index.js ***!
   \*******************************/
-/*! no static exports found */
+/*! exports provided: default, fetchAllBooks, fetchAllLists, fetchPopular, fetchNew */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
