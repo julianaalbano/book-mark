@@ -1,15 +1,15 @@
 const router = require('express').Router();
-const { Color, Category } = require('../db/models');
+const { Book, ListType } = require('../db/models');
 module.exports = router;
 
 router.get('/', async (req, res, next) => {
   try {
-    const colors = await Color.findAll({
+    const books = await Book.findAll({
       include: {
-        model: Category,
+        model: ListType,
       },
     });
-    res.json(colors);
+    res.json(books);
   } catch (err) {
     next(err);
   }
@@ -17,15 +17,15 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const color = await Color.findOne({
+    const singleBook = await Book.findOne({
       where: {
         id: req.params.id,
       },
       include: {
-        model: Category,
+        model: ListType,
       },
     });
-    res.json(color);
+    res.json(singleBook);
   } catch (err) {
     next(err);
   }

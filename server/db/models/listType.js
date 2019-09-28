@@ -1,11 +1,11 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const Category = db.define('category', {
+const ListType = db.define('listType', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
   },
 });
 
-module.exports = Category;
+module.exports = ListType;

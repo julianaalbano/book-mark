@@ -1,10 +1,12 @@
-const Color = require('./color');
-const Category = require('./category');
+const Book = require('./book');
+const ListType = require('./listType');
 
-Category.hasMany(Color);
-Color.belongsTo(Category);
+ListType.hasMany(Book);
+Book.belongsTo(ListType);
+
+// Book.belongsTo(ListType, { through: 'listId' });
 
 module.exports = {
-  Color,
-  Category,
+  Book,
+  ListType,
 };

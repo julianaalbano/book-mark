@@ -1,8 +1,8 @@
 const router = require('express').Router();
 module.exports = router;
 
-router.use('/colors', require('./colors'));
-router.use('/categories', require('./categories'));
+router.use('/books', require('./books'));
+router.use('/lists', require('./lists'));
 
 router.use((req, res, next) => {
   const error = new Error('Not Found');
