@@ -4,12 +4,15 @@ const db = require('../db');
 const Book = db.define('book', {
   title: {
     type: Sequelize.STRING,
+    allowNull: false,
   },
   author: {
     type: Sequelize.STRING,
+    allowNull: false,
   },
   currentRank: {
     type: Sequelize.INTEGER,
+    allowNull: false,
   },
   lastWeekRank: {
     type: Sequelize.INTEGER,

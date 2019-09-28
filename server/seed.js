@@ -40,20 +40,20 @@ async function seed() {
   }
 
   await Promise.all(
-    bookData.map(book => {
-      return Book.create(book);
-    })
-  );
-
-  await Promise.all(
     listNameData.map(list => {
       return List.create(list);
     })
   );
 
-  console.log(`seeded ${bookData.length} books`);
+  await Promise.all(
+    bookData.map(book => {
+      return Book.create(book);
+    })
+  );
 
   console.log(`seeded ${listNameData.length} list categories`);
+
+  console.log(`seeded ${bookData.length} books`);
 
   console.log(`seeded successfully`);
 }
