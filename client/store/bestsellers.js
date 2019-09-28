@@ -3,20 +3,19 @@ import axios from 'axios';
 // INITIAL STATE
 const initialState = {
   allBooks: [],
-  singleBook: {},
-  list: {},
-  booksInList: [],
-  loading: true,
   popular: [],
   new: [],
+  allLists: [],
+  booksInList: [],
+  author: [],
+  loading: true,
 };
 
 // ACTION TYPES
 const GOT_ALL_BOOKS = 'GOT_ALL_BOOKS';
-const GOT_SINGLE_BOOK = 'GOT_SINGLE_BOOK';
-const GOT_LIST = 'GOT_LIST';
+const GOT_ALL_LISTS = 'GOT_ALL_LISTS';
 const GOT_POPULAR = 'GOT_POPULAR';
-const GOT_NEW = 'GOT_NEW'L
+const GOT_NEW = 'GOT_NEW';
 
 // ACTION CREATORS
 const gotAllBooks = books => ({
@@ -24,14 +23,9 @@ const gotAllBooks = books => ({
   books,
 });
 
-const gotSingleBook = book => ({
-  type: GOT_SINGLE_BOOK,
-  book,
-});
-
-const gotList = list => ({
-  type: GOT_LIST,
-  list,
+const gotAllLists = allLists => ({
+  type: GOT_ALL_LISTS,
+  allLists,
 });
 
 const gotPopular = list => ({
@@ -42,7 +36,7 @@ const gotPopular = list => ({
 const gotNew = list => ({
   type: GOT_NEW,
   list,
-})
+});
 
 // THUNKS
 export const fetchAllBooks = () => async dispatch => {
@@ -54,19 +48,10 @@ export const fetchAllBooks = () => async dispatch => {
   }
 };
 
-export const fetchSingleBook = id => async dispatch => {
+export const fetchAllLists = () => async dispatch => {
   try {
-    const res = await axios.get(`/api/books/${id}`);
-    dispatch(gotSingleBook(res.data));
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-export const fetchList = name => async dispatch => {
-  try {
-    const res = await axios.get(`/api/lists/${name}`);
-    dispatch(gotList(res.data));
+    const res = await axios.get('/api/lists');
+    dispatch(gotAllLists(res.data));
   } catch (err) {
     console.error(err);
   }
@@ -80,7 +65,6 @@ export const fetchPopular = () => async dispatch => {
     console.error(err);
   }
 };
-
 
 export const fetchNew = () => async dispatch => {
   try {
@@ -96,13 +80,11 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GOT_ALL_BOOKS:
       return { ...state, allBooks: action.books, loading: false };
-    case GOT_SINGLE_BOOK:
-      return { ...state, singleBook: action.book };
-    case GOT_LIST:
+    case GOT_ALL_LISTS:
       return {
         ...state,
-        list: action.list,
-        booksInList: action.list.books,
+        allLists: action.allLists,
+        // booksInList: action.list.books,
         loading: false,
       };
     case GOT_POPULAR:
@@ -111,12 +93,12 @@ export default function(state = initialState, action) {
         popular: action.list,
         loading: false,
       };
-      case GOT_NEW:
-          return {
-            ...state,
-            new: action.list,
-            loading: false,
-          };
+    case GOT_NEW:
+      return {
+        ...state,
+        new: action.list,
+        loading: false,
+      };
     default:
       return state;
   }
