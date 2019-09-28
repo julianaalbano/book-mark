@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchColors } from '../store/colors';
+import { fetchAllBooks } from '../store/colors';
 import { Link } from 'react-router-dom';
 
-class Colors extends React.Component {
+class Books extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -119,4 +119,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Colors);
+)(Books);

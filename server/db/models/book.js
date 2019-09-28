@@ -45,6 +45,10 @@ const Book = db.define('book', {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
+  favorite: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
 });
 
 module.exports = Book;
