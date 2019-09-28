@@ -13,12 +13,15 @@ class Books extends React.Component {
     this.state = {
       booksToRender: '',
       author: '',
+      listId: '',
+      listName: '',
     };
     this.handleClickAll = this.handleClickAll.bind(this);
     this.handleClickNew = this.handleClickNew.bind(this);
     this.handleClickPopular = this.handleClickPopular.bind(this);
     this.handleClickAllLists = this.handleClickAllLists.bind(this);
     this.handleAuthor = this.handleAuthor.bind(this);
+    this.handleListCategory = this.handleListCategory.bind(this);
   }
   componentDidMount() {
     this.props.fetchAllBooks();
@@ -58,6 +61,13 @@ class Books extends React.Component {
     });
   }
 
+  async handleListCategory() {
+    await this.setState({
+      booksToRender: 'LIST-CATEGORY',
+      listId: event.target.value,
+    });
+  }
+
   render() {
     const authors = [];
     const authorSet = new Set();
@@ -68,14 +78,20 @@ class Books extends React.Component {
       }
     });
     const sortedAuthors = authors.sort();
+
+    const newBooks = [];
+    const newBookSet = new Set();
+    this.props.new.map(book => {
+      if (!authorSet[book.author]) {
+        authorSet[book.author] = true;
+        authors.push(book.author);
+      }
+    });
     return (
       <div>
         <div>
           <h1>New York Times Bestsellers</h1>
-          <p>Category</p>
-          <button type="button" onClick={this.handleClickAllLists}>
-            Lists
-          </button>
+
           <p>Author</p>
           <select onChange={this.handleAuthor}>
             {sortedAuthors.map((author, index) => (
@@ -84,13 +100,15 @@ class Books extends React.Component {
               </option>
             ))}
           </select>
-          {/* <select>
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
-          </select> */}
           <br />
+          <p>Bestseller Category</p>
+          <select onChange={this.handleListCategory}>
+            {this.props.allLists.map((list, index) => (
+              <option key={index} value={list.id}>
+                {list.name}
+              </option>
+            ))}
+          </select>
           <button type="button" onClick={this.handleClickAll}>
             All
           </button>
@@ -117,7 +135,21 @@ class Books extends React.Component {
                   book.author === this.state.author ? (
                     <div>
                       <p>{book.title}</p>
-                      <p>{this.props.allLists[book.listId].name}</p>
+                      <p>{book.list.name}</p>
+                    </div>
+                  ) : null
+                )}
+              </div>
+            </div>
+          ) : this.state.booksToRender === 'LIST-CATEGORY' ? (
+            <div>
+              <h1>BY CATEGORY</h1>
+              <div id="book-map-container">
+                {this.props.allBooks.map(book =>
+                  book.listId == this.state.listId ? (
+                    <div key={book.id}>
+                      <p>{book.title}</p>
+                      <p>{this.state.listName}</p>
                     </div>
                   ) : null
                 )}

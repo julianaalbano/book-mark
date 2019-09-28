@@ -165,13 +165,16 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Books).call(this));
     _this.state = {
       booksToRender: '',
-      author: ''
+      author: '',
+      listId: '',
+      listName: ''
     };
     _this.handleClickAll = _this.handleClickAll.bind(_assertThisInitialized(_this));
     _this.handleClickNew = _this.handleClickNew.bind(_assertThisInitialized(_this));
     _this.handleClickPopular = _this.handleClickPopular.bind(_assertThisInitialized(_this));
     _this.handleClickAllLists = _this.handleClickAllLists.bind(_assertThisInitialized(_this));
     _this.handleAuthor = _this.handleAuthor.bind(_assertThisInitialized(_this));
+    _this.handleListCategory = _this.handleListCategory.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -330,6 +333,36 @@ function (_React$Component) {
       return handleAuthor;
     }()
   }, {
+    key: "handleListCategory",
+    value: function () {
+      var _handleListCategory = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee6() {
+        return regeneratorRuntime.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                _context6.next = 2;
+                return this.setState({
+                  booksToRender: 'LIST-CATEGORY',
+                  listId: event.target.value
+                });
+
+              case 2:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+
+      function handleListCategory() {
+        return _handleListCategory.apply(this, arguments);
+      }
+
+      return handleListCategory;
+    }()
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -343,17 +376,29 @@ function (_React$Component) {
         }
       });
       var sortedAuthors = authors.sort();
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "New York Times Bestsellers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        onClick: this.handleClickAllLists
-      }, "Lists"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Author"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      var newBooks = [];
+      var newBookSet = new Set();
+      this.props["new"].map(function (book) {
+        if (!authorSet[book.author]) {
+          authorSet[book.author] = true;
+          authors.push(book.author);
+        }
+      });
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "New York Times Bestsellers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Author"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         onChange: this.handleAuthor
       }, sortedAuthors.map(function (author, index) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: index,
           value: author
         }, author);
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Bestseller Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        onChange: this.handleListCategory
+      }, this.props.allLists.map(function (list, index) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: index,
+          value: list.id
+        }, list.name);
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         onClick: this.handleClickAll
       }, "All"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -368,7 +413,13 @@ function (_React$Component) {
       }) : this.state.booksToRender === 'AUTHOR' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "BY AUTHOR"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "book-map-container"
       }, this.props.allBooks.map(function (book) {
-        return book.author === _this2.state.author ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this2.props.allLists[book.listId].name)) : null;
+        return book.author === _this2.state.author ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.list.name)) : null;
+      }))) : this.state.booksToRender === 'LIST-CATEGORY' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "BY CATEGORY"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "book-map-container"
+      }, this.props.allBooks.map(function (book) {
+        return book.listId == _this2.state.listId ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: book.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this2.state.listName)) : null;
       }))) : this.state.booksToRender === 'LIST' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "LIST"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "book-map-container"
       }, this.props.allLists.map(function (list) {
