@@ -170,6 +170,8 @@ class Books extends React.Component {
                     <div>
                       <p>{book.title}</p>
                       <p>{book.list.name}</p>
+                      <img src={book.coverArt} />
+                      <p>{book.description}</p>
                     </div>
                   ) : null
                 )}
@@ -183,6 +185,8 @@ class Books extends React.Component {
                   book.listId == this.state.listId ? (
                     <div key={book.id}>
                       <p>{book.title}</p>
+                      <img src={book.coverArt} />
+                      <p>{book.description}</p>
                       <p>{this.state.listName}</p>
                     </div>
                   ) : null

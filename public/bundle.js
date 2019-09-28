@@ -444,13 +444,17 @@ function (_React$Component) {
       }) : this.state.booksToRender === 'AUTHOR' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "BY AUTHOR"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "book-map-container"
       }, this.props.allBooks.map(function (book) {
-        return book.author === _this2.state.author ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.list.name)) : null;
+        return book.author === _this2.state.author ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.list.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: book.coverArt
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.description)) : null;
       }))) : this.state.booksToRender === 'LIST-CATEGORY' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "BY CATEGORY"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "book-map-container"
       }, this.props.allBooks.map(function (book) {
         return book.listId == _this2.state.listId ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: book.id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this2.state.listName)) : null;
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: book.coverArt
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this2.state.listName)) : null;
       }))) : this.state.booksToRender === 'LIST' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "LIST"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "book-map-container"
       }, this.props.allLists.map(function (list) {
