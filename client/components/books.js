@@ -82,11 +82,45 @@ class Books extends React.Component {
     const newBooks = [];
     const newBookSet = new Set();
     this.props.new.map(book => {
-      if (!authorSet[book.author]) {
-        authorSet[book.author] = true;
-        authors.push(book.author);
+      if (!newBookSet[book.title]) {
+        newBookSet[book.title] = true;
+        newBooks.push({
+          title: book.title,
+          author: book.author,
+          coverArt: book.coverArt,
+          description: book.description,
+        });
       }
     });
+
+    const allBooks = [];
+    const allBookSet = new Set();
+    this.props.allBooks.map(book => {
+      if (!allBookSet[book.title]) {
+        allBookSet[book.title] = true;
+        allBooks.push({
+          title: book.title,
+          author: book.author,
+          coverArt: book.coverArt,
+          description: book.description,
+        });
+      }
+    });
+
+    const popularBooks = [];
+    const popularBooksSet = new Set();
+    this.props.popular.map(book => {
+      if (!popularBooksSet[book.title]) {
+        popularBooksSet[book.title] = true;
+        popularBooks.push({
+          title: book.title,
+          author: book.author,
+          coverArt: book.coverArt,
+          description: book.description,
+        });
+      }
+    });
+
     return (
       <div>
         <div>
@@ -170,7 +204,7 @@ class Books extends React.Component {
             <div>
               <h1>Popular Bestsellers</h1>
               <div id="book-map-container">
-                {this.props.popular.map(book => (
+                {popularBooks.map(book => (
                   <div key={book.id} className="book-map">
                     <img className="book-map-img" src={book.coverArt} />
                     <div>
@@ -186,7 +220,7 @@ class Books extends React.Component {
             <div>
               <h1>All Bestsellers</h1>
               <div id="book-map-container">
-                {this.props.allBooks.map(book => (
+                {allBooks.map(book => (
                   <div key={book.id} className="book-map">
                     <img className="book-map-img" src={book.coverArt} />
                     <div>
@@ -202,7 +236,7 @@ class Books extends React.Component {
             <div>
               <h1>New Bestsellers</h1>
               <div id="book-map-container">
-                {this.props.new.map(book => (
+                {newBooks.map(book => (
                   <div key={book.id} className="book-map">
                     <img className="book-map-img" src={book.coverArt} />
                     <div>

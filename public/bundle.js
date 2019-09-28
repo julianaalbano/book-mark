@@ -379,9 +379,40 @@ function (_React$Component) {
       var newBooks = [];
       var newBookSet = new Set();
       this.props["new"].map(function (book) {
-        if (!authorSet[book.author]) {
-          authorSet[book.author] = true;
-          authors.push(book.author);
+        if (!newBookSet[book.title]) {
+          newBookSet[book.title] = true;
+          newBooks.push({
+            title: book.title,
+            author: book.author,
+            coverArt: book.coverArt,
+            description: book.description
+          });
+        }
+      });
+      var allBooks = [];
+      var allBookSet = new Set();
+      this.props.allBooks.map(function (book) {
+        if (!allBookSet[book.title]) {
+          allBookSet[book.title] = true;
+          allBooks.push({
+            title: book.title,
+            author: book.author,
+            coverArt: book.coverArt,
+            description: book.description
+          });
+        }
+      });
+      var popularBooks = [];
+      var popularBooksSet = new Set();
+      this.props.popular.map(function (book) {
+        if (!popularBooksSet[book.title]) {
+          popularBooksSet[book.title] = true;
+          popularBooks.push({
+            title: book.title,
+            author: book.author,
+            coverArt: book.coverArt,
+            description: book.description
+          });
         }
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "New York Times Bestsellers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Author"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
@@ -429,7 +460,7 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, list.name));
       }))) : this.state.booksToRender === 'POPULAR' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Popular Bestsellers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "book-map-container"
-      }, this.props.popular.map(function (book) {
+      }, popularBooks.map(function (book) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: book.id,
           className: "book-map"
@@ -439,7 +470,7 @@ function (_React$Component) {
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "by ", book.author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Description: ", book.description)));
       }))) : this.state.booksToRender === 'ALL' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "All Bestsellers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "book-map-container"
-      }, this.props.allBooks.map(function (book) {
+      }, allBooks.map(function (book) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: book.id,
           className: "book-map"
@@ -449,7 +480,7 @@ function (_React$Component) {
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "by ", book.author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Description: ", book.description)));
       }))) : this.state.booksToRender === 'NEW' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "New Bestsellers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "book-map-container"
-      }, this.props["new"].map(function (book) {
+      }, newBooks.map(function (book) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: book.id,
           className: "book-map"
