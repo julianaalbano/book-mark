@@ -1,30 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchAllBooks } from '../store/colors';
-import { Link } from 'react-router-dom';
+import { fetchAllBooks } from '../store/bestsellers';
+// import { Link } from 'react-router-dom';
 
 class Books extends React.Component {
   constructor() {
     super();
     this.state = {
-      currentPage: 1,
-      colorsPerPage: 12,
+      booksToRender: [],
     };
-    this.handleClick = this.handleClick.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
   }
   componentDidMount() {
-    this.props.fetchColors();
+    this.props.fetchAllBooks();
   }
 
   handleClick(event) {
-    this.setState({
-      currentPage: Number(event.target.id),
-    });
+    // this.
   }
 
   render() {
-    const { colors } = this.props;
-    const { currentPage, colorsPerPage } = this.state;
+    const { allBooks } = this.props;
     if (this.props.loading) {
       return (
         <img
@@ -32,86 +28,57 @@ class Books extends React.Component {
           className="loading-img"
         />
       );
-    }
-
-    const indexOfLastColor = currentPage * colorsPerPage;
-    const indexOfFirstColor = indexOfLastColor - colorsPerPage;
-    const currentColors = colors.allColors.slice(
-      indexOfFirstColor,
-      indexOfLastColor
-    );
-
-    const renderColors = currentColors.map(color => {
+    } else {
       return (
-        <Link to={`/colors/${color.id}`} key={color.id}>
-          <div
-            className="color-container"
-            style={{ backgroundColor: `${color.hexCode}` }}
-          >
-            <button type="button">{color.hexCode}</button>
-          </div>
-        </Link>
+        <div>
+          <h1>New York Times Bestsellers</h1>
+          <p>Category</p>
+          <select>
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+          </select>
+          <p>Author</p>
+          <select>
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+          </select>
+          <button type="button" onClick={this.handleClick}>
+            Popularity
+          </button>
+          <button type="button" onClick={this.handleClick}>
+            New
+          </button>
+          <h1>All Bestsellers</h1>
+          {allBooks.map(book => (
+            <div key={book.id}>
+              <img src={book.coverArt} />
+              <p>
+                {book.title} by {book.author}
+              </p>
+              <p>Description: {book.description}</p>
+            </div>
+          ))}
+        </div>
       );
-    });
-
-    const pageNumbers = [];
-    for (
-      let i = 1;
-      i <= Math.ceil(colors.allColors.length / colorsPerPage);
-      i++
-    ) {
-      pageNumbers.push(i);
     }
-
-    const renderPageNumbers = pageNumbers.map(number => {
-      if (number === this.state.currentPage) {
-        return (
-          <button
-            key={number}
-            type="button"
-            className="ind-page-nums"
-            id={number}
-            onClick={this.handleClick}
-            style={{ textDecoration: 'underline', fontWeight: 900 }}
-          >
-            {number}
-          </button>
-        );
-      } else {
-        return (
-          <button
-            key={number}
-            type="button"
-            className="ind-page-nums"
-            id={number}
-            onClick={this.handleClick}
-          >
-            {number}
-          </button>
-        );
-      }
-    });
-
-    return (
-      <div id="span-page">
-        <div id="all-colors-container">{renderColors}</div>
-        <p id="page-numbers">{renderPageNumbers}</p>
-      </div>
-    );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    colors: state.colors,
-    loading: state.colors.loading,
+    allBooks: state.bestsellers.allBooks,
+    loading: state.bestsellers.loading,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchColors: function() {
-      dispatch(fetchColors());
+    fetchAllBooks: function() {
+      dispatch(fetchAllBooks());
     },
   };
 }

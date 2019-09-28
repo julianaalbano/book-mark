@@ -113,6 +113,134 @@ var App = function App() {
 
 /***/ }),
 
+/***/ "./client/components/books.js":
+/*!************************************!*\
+  !*** ./client/components/books.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_bestsellers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/bestsellers */ "./client/store/bestsellers.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+ // import { Link } from 'react-router-dom';
+
+var Books =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Books, _React$Component);
+
+  function Books() {
+    var _this;
+
+    _classCallCheck(this, Books);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Books).call(this));
+    _this.state = {
+      booksToRender: []
+    }; // this.handleClick = this.handleClick.bind(this);
+
+    return _this;
+  }
+
+  _createClass(Books, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchAllBooks();
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(event) {// this.
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var allBooks = this.props.allBooks;
+
+      if (this.props.loading) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: "https://loading.io/spinners/ellipsis/lg.discuss-ellipsis-preloader.gif",
+          className: "loading-img"
+        });
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "New York Times Bestsellers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: "volvo"
+        }, "Volvo"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: "saab"
+        }, "Saab"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: "mercedes"
+        }, "Mercedes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: "audi"
+        }, "Audi")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Author"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: "volvo"
+        }, "Volvo"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: "saab"
+        }, "Saab"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: "mercedes"
+        }, "Mercedes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: "audi"
+        }, "Audi")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          onClick: this.handleClick
+        }, "Popularity"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          onClick: this.handleClick
+        }, "New"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "All Bestsellers"), allBooks.map(function (book) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: book.id
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+            src: book.coverArt
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.title, " by ", book.author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Description: ", book.description));
+        }));
+      }
+    }
+  }]);
+
+  return Books;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+function mapStateToProps(state) {
+  return {
+    allBooks: state.bestsellers.allBooks,
+    loading: state.bestsellers.loading
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchAllBooks: function fetchAllBooks() {
+      dispatch(Object(_store_bestsellers__WEBPACK_IMPORTED_MODULE_2__["fetchAllBooks"])());
+    }
+  };
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Books));
+
+/***/ }),
+
 /***/ "./client/components/nav.js":
 /*!**********************************!*\
   !*** ./client/components/nav.js ***!
@@ -133,10 +261,7 @@ var Nav = function Nav(props) {
     id: "nav-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "hh.png",
-    id: "nav-logo"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Home")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "search-bar"
   }, "Search"));
 };
@@ -206,14 +331,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-!(function webpackMissingModule() { var e = new Error("Cannot find module './components/books'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-!(function webpackMissingModule() { var e = new Error("Cannot find module './components/singlebook'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-!(function webpackMissingModule() { var e = new Error("Cannot find module './components/lists'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _components_books__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/books */ "./client/components/books.js");
 
 
-
-
- // import Colors from './components/colors';
+ // import SingleBook from './components/singlebook';
+// import Lists from './components/lists';
+// import Colors from './components/colors';
 // import SingleColor from './components/singleColor';
 // import colorCategory from './components/colorCategory';
 
@@ -221,15 +344,7 @@ var Routes = function Routes(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/",
-    component: !(function webpackMissingModule() { var e = new Error("Cannot find module './components/books'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
-    path: "/colors/:hexName",
-    component: !(function webpackMissingModule() { var e = new Error("Cannot find module './components/singlebook'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
-    path: "/Red",
-    component: !(function webpackMissingModule() { var e = new Error("Cannot find module './components/lists'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())
+    component: _components_books__WEBPACK_IMPORTED_MODULE_2__["default"]
   }));
 };
 
@@ -241,7 +356,7 @@ var Routes = function Routes(props) {
 /*!*************************************!*\
   !*** ./client/store/bestsellers.js ***!
   \*************************************/
-/*! exports provided: fetchAllBooks, fetchSingleBook, fetchList, default */
+/*! exports provided: fetchAllBooks, fetchSingleBook, fetchList, fetchPopular, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -249,6 +364,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAllBooks", function() { return fetchAllBooks; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSingleBook", function() { return fetchSingleBook; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchList", function() { return fetchList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPopular", function() { return fetchPopular; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -268,12 +384,14 @@ var initialState = {
   singleBook: {},
   list: {},
   booksInList: [],
-  loading: true
+  loading: true,
+  popular: []
 }; // ACTION TYPES
 
 var GOT_ALL_BOOKS = 'GOT_ALL_BOOKS';
 var GOT_SINGLE_BOOK = 'GOT_SINGLE_BOOK';
-var GOT_LIST = 'GOT_LIST'; // ACTION CREATORS
+var GOT_LIST = 'GOT_LIST';
+var GOT_POPULAR = 'GOT_POPULAR'; // ACTION CREATORS
 
 var gotAllBooks = function gotAllBooks(books) {
   return {
@@ -292,6 +410,13 @@ var gotSingleBook = function gotSingleBook(book) {
 var gotList = function gotList(list) {
   return {
     type: GOT_LIST,
+    list: list
+  };
+};
+
+var gotPopular = function gotPopular(list) {
+  return {
+    type: GOT_POPULAR,
     list: list
   };
 }; // THUNKS
@@ -419,6 +544,47 @@ var fetchList = function fetchList(name) {
       };
     }()
   );
+};
+var fetchPopular = function fetchPopular() {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref4 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee4(dispatch) {
+        var res;
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                _context4.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/books/popular");
+
+              case 3:
+                res = _context4.sent;
+                dispatch(gotPopular(res.data));
+                _context4.next = 10;
+                break;
+
+              case 7:
+                _context4.prev = 7;
+                _context4.t0 = _context4["catch"](0);
+                console.error(_context4.t0);
+
+              case 10:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[0, 7]]);
+      }));
+
+      return function (_x4) {
+        return _ref4.apply(this, arguments);
+      };
+    }()
+  );
 }; // REDUCER
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
@@ -444,6 +610,12 @@ var fetchList = function fetchList(name) {
         loading: false
       });
 
+    case GOT_POPULAR:
+      return _objectSpread({}, state, {
+        popular: action.list,
+        loading: false
+      });
+
     default:
       return state;
   }
@@ -455,7 +627,7 @@ var fetchList = function fetchList(name) {
 /*!*******************************!*\
   !*** ./client/store/index.js ***!
   \*******************************/
-/*! exports provided: default, fetchAllBooks, fetchSingleBook, fetchList */
+/*! exports provided: default, fetchAllBooks, fetchSingleBook, fetchList, fetchPopular */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -472,6 +644,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "fetchSingleBook", function() { return _bestsellers__WEBPACK_IMPORTED_MODULE_4__["fetchSingleBook"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "fetchList", function() { return _bestsellers__WEBPACK_IMPORTED_MODULE_4__["fetchList"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "fetchPopular", function() { return _bestsellers__WEBPACK_IMPORTED_MODULE_4__["fetchPopular"]; });
 
 
 
@@ -41296,7 +41470,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

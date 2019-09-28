@@ -7,12 +7,14 @@ const initialState = {
   list: {},
   booksInList: [],
   loading: true,
+  popular: [],
 };
 
 // ACTION TYPES
 const GOT_ALL_BOOKS = 'GOT_ALL_BOOKS';
 const GOT_SINGLE_BOOK = 'GOT_SINGLE_BOOK';
 const GOT_LIST = 'GOT_LIST';
+const GOT_POPULAR = 'GOT_POPULAR';
 
 // ACTION CREATORS
 const gotAllBooks = books => ({
@@ -27,6 +29,11 @@ const gotSingleBook = book => ({
 
 const gotList = list => ({
   type: GOT_LIST,
+  list,
+});
+
+const gotPopular = list => ({
+  type: GOT_POPULAR,
   list,
 });
 
@@ -58,6 +65,15 @@ export const fetchList = name => async dispatch => {
   }
 };
 
+export const fetchPopular = () => async dispatch => {
+  try {
+    const res = await axios.get(`/api/books/popular`);
+    dispatch(gotPopular(res.data));
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 // REDUCER
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -70,6 +86,12 @@ export default function(state = initialState, action) {
         ...state,
         list: action.list,
         booksInList: action.list.books,
+        loading: false,
+      };
+    case GOT_POPULAR:
+      return {
+        ...state,
+        popular: action.list,
         loading: false,
       };
     default:
