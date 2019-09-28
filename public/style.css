@@ -2,36 +2,23 @@
   font-family: 'Source Serif Pro', serif;
 }
 
-.color-container {
-  margin: 20px;
-  height: 100px;
-  padding-top: 50px;
-  display: inline-block;
-  border-radius: 5px;
-  border-width: 3px;
-  border-color: #d6d8d7;
-  box-shadow: 0px 2px 3px grey;
+.book-map {
+  display: flex;
+  width: 600px;
+  height: 200px;
 }
 
-.color-container button {
-  width: 160px;
-  height: 35px;
-  font-size: 14pt;
-  margin: 75px 0 0 0;
-  text-align: left;
-  padding-left: 20px;
-  color: #363c3c;
-  background-color: #fefffe;
-  border-radius: 0 0 4px 4px;
-  border-width: 1.5px;
-  border-color: #d6d8d7;
+.book-map-img {
+  width: 125px;
+  height: auto;
+  margin: 15px;
 }
 
-#all-colors-container {
-  max-width: 800px;
-  padding: 0 70px;
-  margin: 20px auto 0px auto;
+#book-map-container {
+  margin: 20px 400px;
 }
+
+/* //// */
 
 #nav-container {
   display: flex;
@@ -52,58 +39,6 @@
 #nav-logo a {
   background-color: #363c3c;
   height: 0px;
-}
-
-#app-flex {
-  display: flex;
-}
-
-#sidebar-container {
-  background-color: #d6d8d7;
-  min-width: 250px;
-  min-height: 100%;
-  box-shadow: 0px 2px 3px grey;
-}
-
-#sidebar-container p {
-  background-color: #d6d8d7;
-}
-
-#back-to-colors {
-  margin-top: 50px;
-}
-
-#random-button {
-  width: 180px;
-  height: 45px;
-  border-radius: 10px;
-  border-color: #363c3c;
-  font-size: 13pt;
-  margin-top: 40px;
-  margin-left: 20px;
-  margin-right: 20px;
-  font-weight: 700;
-  outline: 0;
-  cursor: pointer;
-}
-
-#sidebar-colors button {
-  margin: 0px 20px;
-  background-color: #d6d8d7;
-  font-size: 15pt;
-  color: #363c3c;
-  text-decoration: none;
-  outline: 0;
-  border-color: #d6d8d7;
-}
-
-.sidebar-color-links {
-  margin-top: 15px;
-}
-
-#sidebar-colors button:hover {
-  font-weight: 900;
-  cursor: pointer;
 }
 
 #search-bar {
@@ -165,22 +100,6 @@
 
 #span-page {
   width: 100%;
-}
-
-#page-numbers {
-  display: flex;
-  justify-content: center;
-  margin: 0;
-}
-
-.ind-page-nums {
-  margin: 15px 2px;
-  background-color: #fefffe;
-  border-color: #fefffe;
-  color: #363c3c;
-  font-size: 15pt;
-  cursor: pointer;
-  outline: 0;
 }
 
 .pointer-cursor:hover {
