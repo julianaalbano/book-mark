@@ -166,8 +166,7 @@ function (_React$Component) {
     _this.state = {
       booksToRender: '',
       author: '',
-      listId: '',
-      listName: ''
+      listId: ''
     };
     _this.handleClickAll = _this.handleClickAll.bind(_assertThisInitialized(_this));
     _this.handleClickNew = _this.handleClickNew.bind(_assertThisInitialized(_this));
@@ -415,7 +414,12 @@ function (_React$Component) {
           });
         }
       });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Filter by Author"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "filter-categories-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "filter-text"
+      }, "Filter by Author: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "dropdown",
         onChange: this.handleAuthor
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "first"
@@ -424,23 +428,31 @@ function (_React$Component) {
           key: index,
           value: author
         }, author);
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Bestseller Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "filter-text"
+      }, "Filter by Bestseller Category: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "dropdown",
         onChange: this.handleListCategory
-      }, this.props.allLists.map(function (list, index) {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "first"
+      }, "Choose a category"), this.props.allLists.map(function (list, index) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: index,
-          value: list.id
+          value: list.id,
+          listName: list.name
         }, list.name);
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "button-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         onClick: this.handleClickAll
-      }, "All"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "All Bestsellers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         onClick: this.handleClickPopular
-      }, "Popularity"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "Popular Bestsellers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         onClick: this.handleClickNew
-      }, "New")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.loading ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }, "Newest Bestsellers"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.loading ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: "https://loading.io/spinners/ellipsis/lg.discuss-ellipsis-preloader.gif",
         className: "loading-img"
       }) : this.state.booksToRender === 'AUTHOR' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -455,57 +467,82 @@ function (_React$Component) {
           className: "book-map-img"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "book-details"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Title:"), " ", book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Author:"), " ", book.author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "filter-book-category"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "NYT Bestseller List:"), " ", book.list.name), book.description === '' ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "filter-book-description"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Description:"), " ", book.description))) : null;
-      })) : this.state.booksToRender === 'LIST-CATEGORY' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "BY CATEGORY"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })) : this.state.booksToRender === 'LIST-CATEGORY' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "book-map-container"
       }, this.props.allBooks.map(function (book) {
         return book.listId == _this2.state.listId ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          key: book.id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: book.coverArt
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this2.state.listName)) : null;
-      }))) : this.state.booksToRender === 'LIST' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "LIST"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "book-map-container"
-      }, this.props.allLists.map(function (list) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          key: list.id,
-          className: "book-map"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, list.name));
-      }))) : this.state.booksToRender === 'POPULAR' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Popular Bestsellers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "book-map-container"
-      }, popularBooks.map(function (book) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          key: book.id,
           className: "book-map"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          className: "book-map-img",
-          src: book.coverArt
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "by ", book.author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Description: ", book.description)));
-      }))) : this.state.booksToRender === 'ALL' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "All Bestsellers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          src: book.coverArt,
+          className: "book-map-img"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "book-details"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Title:"), " ", book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Author:"), " ", book.author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "filter-book-category"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "NYT Bestseller List:"), " ", book.list.name), book.description === '' ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "filter-book-description"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Description:"), " ", book.description))) : null;
+      })) : this.state.booksToRender === 'POPULAR' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "book-map-container"
-      }, allBooks.map(function (book) {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "filter-book-title"
+      }, "Popular NYT Bestsellers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "description"
+      }, "4+ weeks on the Bestsellers list"), popularBooks.map(function (book) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          key: book.id,
           className: "book-map"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          className: "book-map-img",
-          src: book.coverArt
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "by ", book.author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Description: ", book.description)));
-      }))) : this.state.booksToRender === 'NEW' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "New Bestsellers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          src: book.coverArt,
+          className: "book-map-img"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "book-details"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Title:"), " ", book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Author:"), " ", book.author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "filter-book-category"
+        }), book.description === '' ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "filter-book-description"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Description:"), " ", book.description)));
+      })) : this.state.booksToRender === 'ALL' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "book-map-container"
-      }, newBooks.map(function (book) {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "filter-book-title"
+      }, "All NYT Bestsellers"), allBooks.map(function (book) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          key: book.id,
           className: "book-map"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          className: "book-map-img",
-          src: book.coverArt
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "by ", book.author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Description: ", book.description)));
-      }))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          src: book.coverArt,
+          className: "book-map-img"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "book-details"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Title:"), " ", book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Author:"), " ", book.author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "filter-book-category"
+        }), book.description === '' ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "filter-book-description"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Description:"), " ", book.description)));
+      })) : this.state.booksToRender === 'NEW' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "book-map-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "filter-book-title"
+      }, "New NYT Bestsellers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "description"
+      }, "First week on the Bestsellers list"), newBooks.map(function (book) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "book-map"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: book.coverArt,
+          className: "book-map-img"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "book-details"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Title:"), " ", book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Author:"), " ", book.author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "filter-book-category"
+        }), book.description === '' ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "filter-book-description"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Description:"), " ", book.description)));
+      })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         id: "instruction-text"
       }, "Pick a filter above to learn more about the recent New York Times Bestsellers!")));
     }

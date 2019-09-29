@@ -14,7 +14,6 @@ class Books extends React.Component {
       booksToRender: '',
       author: '',
       listId: '',
-      listName: '',
     };
     this.handleClickAll = this.handleClickAll.bind(this);
     this.handleClickNew = this.handleClickNew.bind(this);
@@ -123,9 +122,9 @@ class Books extends React.Component {
 
     return (
       <div>
-        <div>
-          <p>Filter by Author</p>
-          <select onChange={this.handleAuthor}>
+        <div id="filter-categories-container">
+          <p className="filter-text">Filter by Author: </p>
+          <select className="dropdown" onChange={this.handleAuthor}>
             <option value="first">Choose an author</option>
             {sortedAuthors.map((author, index) => (
               <option key={index} value={author}>
@@ -134,24 +133,27 @@ class Books extends React.Component {
             ))}
           </select>
           <br />
-          <p>Bestseller Category</p>
-          <select onChange={this.handleListCategory}>
+          <p className="filter-text">Filter by Bestseller Category: </p>
+          <select className="dropdown" onChange={this.handleListCategory}>
+            <option value="first">Choose a category</option>
             {this.props.allLists.map((list, index) => (
-              <option key={index} value={list.id}>
+              <option key={index} value={list.id} listName={list.name}>
                 {list.name}
               </option>
             ))}
           </select>
-          <button type="button" onClick={this.handleClickAll}>
-            All
-          </button>
-          <button type="button" onClick={this.handleClickPopular}>
-            Popularity
-          </button>
           <br />
-          <button type="button" onClick={this.handleClickNew}>
-            New
-          </button>
+          <div id="button-container">
+            <button type="button" onClick={this.handleClickAll}>
+              All Bestsellers
+            </button>
+            <button type="button" onClick={this.handleClickPopular}>
+              Popular Bestsellers
+            </button>
+            <button type="button" onClick={this.handleClickNew}>
+              Newest Bestsellers
+            </button>
+          </div>
         </div>
 
         <div>
@@ -168,6 +170,12 @@ class Books extends React.Component {
                   <div className="book-map">
                     <img src={book.coverArt} className="book-map-img" />
                     <div className="book-details">
+                      <p>
+                        <strong>Title:</strong> {book.title}
+                      </p>
+                      <p>
+                        <strong>Author:</strong> {book.author}
+                      </p>
                       <p className="filter-book-category">
                         <strong>NYT Bestseller List:</strong> {book.list.name}
                       </p>
@@ -182,79 +190,101 @@ class Books extends React.Component {
               )}
             </div>
           ) : this.state.booksToRender === 'LIST-CATEGORY' ? (
-            <div>
-              <h1>BY CATEGORY</h1>
-              <div id="book-map-container">
-                {this.props.allBooks.map(book =>
-                  book.listId == this.state.listId ? (
-                    <div key={book.id}>
-                      <p>{book.title}</p>
-                      <img src={book.coverArt} />
-                      <p>{book.description}</p>
-                      <p>{this.state.listName}</p>
+            <div id="book-map-container">
+              {this.props.allBooks.map(book =>
+                book.listId == this.state.listId ? (
+                  <div className="book-map">
+                    <img src={book.coverArt} className="book-map-img" />
+                    <div className="book-details">
+                      <p>
+                        <strong>Title:</strong> {book.title}
+                      </p>
+                      <p>
+                        <strong>Author:</strong> {book.author}
+                      </p>
+                      <p className="filter-book-category">
+                        <strong>NYT Bestseller List:</strong> {book.list.name}
+                      </p>
+                      {book.description === '' ? null : (
+                        <p className="filter-book-description">
+                          <strong>Description:</strong> {book.description}
+                        </p>
+                      )}
                     </div>
-                  ) : null
-                )}
-              </div>
-            </div>
-          ) : this.state.booksToRender === 'LIST' ? (
-            <div>
-              <h1>LIST</h1>
-              <div id="book-map-container">
-                {this.props.allLists.map(list => (
-                  <div key={list.id} className="book-map">
-                    <p>{list.name}</p>
                   </div>
-                ))}
-              </div>
+                ) : null
+              )}
             </div>
           ) : this.state.booksToRender === 'POPULAR' ? (
-            <div>
-              <h1>Popular Bestsellers</h1>
-              <div id="book-map-container">
-                {popularBooks.map(book => (
-                  <div key={book.id} className="book-map">
-                    <img className="book-map-img" src={book.coverArt} />
-                    <div>
-                      <p>{book.title}</p>
-                      <p>by {book.author}</p>
-                      <p>Description: {book.description}</p>
-                    </div>
+            <div id="book-map-container">
+              <p className="filter-book-title">Popular NYT Bestsellers</p>
+              <p className="description">4+ weeks on the Bestsellers list</p>
+              {popularBooks.map(book => (
+                <div className="book-map">
+                  <img src={book.coverArt} className="book-map-img" />
+                  <div className="book-details">
+                    <p>
+                      <strong>Title:</strong> {book.title}
+                    </p>
+                    <p>
+                      <strong>Author:</strong> {book.author}
+                    </p>
+                    <p className="filter-book-category"></p>
+                    {book.description === '' ? null : (
+                      <p className="filter-book-description">
+                        <strong>Description:</strong> {book.description}
+                      </p>
+                    )}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           ) : this.state.booksToRender === 'ALL' ? (
-            <div>
-              <h1>All Bestsellers</h1>
-              <div id="book-map-container">
-                {allBooks.map(book => (
-                  <div key={book.id} className="book-map">
-                    <img className="book-map-img" src={book.coverArt} />
-                    <div>
-                      <p>{book.title}</p>
-                      <p>by {book.author}</p>
-                      <p>Description: {book.description}</p>
-                    </div>
+            <div id="book-map-container">
+              <p className="filter-book-title">All NYT Bestsellers</p>
+              {allBooks.map(book => (
+                <div className="book-map">
+                  <img src={book.coverArt} className="book-map-img" />
+                  <div className="book-details">
+                    <p>
+                      <strong>Title:</strong> {book.title}
+                    </p>
+                    <p>
+                      <strong>Author:</strong> {book.author}
+                    </p>
+                    <p className="filter-book-category"></p>
+                    {book.description === '' ? null : (
+                      <p className="filter-book-description">
+                        <strong>Description:</strong> {book.description}
+                      </p>
+                    )}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           ) : this.state.booksToRender === 'NEW' ? (
-            <div>
-              <h1>New Bestsellers</h1>
-              <div id="book-map-container">
-                {newBooks.map(book => (
-                  <div key={book.id} className="book-map">
-                    <img className="book-map-img" src={book.coverArt} />
-                    <div>
-                      <p>{book.title}</p>
-                      <p>by {book.author}</p>
-                      <p>Description: {book.description}</p>
-                    </div>
+            <div id="book-map-container">
+              <p className="filter-book-title">New NYT Bestsellers</p>
+              <p className="description">First week on the Bestsellers list</p>
+              {newBooks.map(book => (
+                <div className="book-map">
+                  <img src={book.coverArt} className="book-map-img" />
+                  <div className="book-details">
+                    <p>
+                      <strong>Title:</strong> {book.title}
+                    </p>
+                    <p>
+                      <strong>Author:</strong> {book.author}
+                    </p>
+                    <p className="filter-book-category"></p>
+                    {book.description === '' ? null : (
+                      <p className="filter-book-description">
+                        <strong>Description:</strong> {book.description}
+                      </p>
+                    )}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           ) : (
             <p id="instruction-text">
