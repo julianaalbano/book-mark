@@ -415,9 +415,11 @@ function (_React$Component) {
           });
         }
       });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "New York Times Bestsellers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Author"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Filter by Author"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         onChange: this.handleAuthor
-      }, sortedAuthors.map(function (author, index) {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "first"
+      }, "Choose an author"), sortedAuthors.map(function (author, index) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: index,
           value: author
@@ -441,13 +443,24 @@ function (_React$Component) {
       }, "New")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.loading ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: "https://loading.io/spinners/ellipsis/lg.discuss-ellipsis-preloader.gif",
         className: "loading-img"
-      }) : this.state.booksToRender === 'AUTHOR' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "BY AUTHOR"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }) : this.state.booksToRender === 'AUTHOR' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "book-map-container"
-      }, this.props.allBooks.map(function (book) {
-        return book.author === _this2.state.author ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.list.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: book.coverArt
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.description)) : null;
-      }))) : this.state.booksToRender === 'LIST-CATEGORY' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "BY CATEGORY"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "filter-book-title"
+      }, "Books by ", this.state.author), this.props.allBooks.map(function (book) {
+        return book.author === _this2.state.author ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "book-map"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: book.coverArt,
+          className: "book-map-img"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "book-details"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "filter-book-category"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "NYT Bestseller List:"), " ", book.list.name), book.description === '' ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "filter-book-description"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Description:"), " ", book.description))) : null;
+      })) : this.state.booksToRender === 'LIST-CATEGORY' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "BY CATEGORY"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "book-map-container"
       }, this.props.allBooks.map(function (book) {
         return book.listId == _this2.state.listId ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -492,7 +505,9 @@ function (_React$Component) {
           className: "book-map-img",
           src: book.coverArt
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, book.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "by ", book.author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Description: ", book.description)));
-      }))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "d\u2013(^ \u203F ^ )z ")));
+      }))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        id: "instruction-text"
+      }, "Pick a filter above to learn more about the recent New York Times Bestsellers!")));
     }
   }]);
 
@@ -549,11 +564,9 @@ __webpack_require__.r(__webpack_exports__);
 var Nav = function Nav(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "nav-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Home")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "search-bar"
-  }, "Search"));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    id: "nav-title"
+  }, "New York Times Bestsellers"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Nav);

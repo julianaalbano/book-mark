@@ -124,10 +124,9 @@ class Books extends React.Component {
     return (
       <div>
         <div>
-          <h1>New York Times Bestsellers</h1>
-
-          <p>Author</p>
+          <p>Filter by Author</p>
           <select onChange={this.handleAuthor}>
+            <option value="first">Choose an author</option>
             {sortedAuthors.map((author, index) => (
               <option key={index} value={author}>
                 {author}
@@ -162,20 +161,25 @@ class Books extends React.Component {
               className="loading-img"
             />
           ) : this.state.booksToRender === 'AUTHOR' ? (
-            <div>
-              <h1>BY AUTHOR</h1>
-              <div id="book-map-container">
-                {this.props.allBooks.map(book =>
-                  book.author === this.state.author ? (
-                    <div>
-                      <p>{book.title}</p>
-                      <p>{book.list.name}</p>
-                      <img src={book.coverArt} />
-                      <p>{book.description}</p>
+            <div id="book-map-container">
+              <p className="filter-book-title">Books by {this.state.author}</p>
+              {this.props.allBooks.map(book =>
+                book.author === this.state.author ? (
+                  <div className="book-map">
+                    <img src={book.coverArt} className="book-map-img" />
+                    <div className="book-details">
+                      <p className="filter-book-category">
+                        <strong>NYT Bestseller List:</strong> {book.list.name}
+                      </p>
+                      {book.description === '' ? null : (
+                        <p className="filter-book-description">
+                          <strong>Description:</strong> {book.description}
+                        </p>
+                      )}
                     </div>
-                  ) : null
-                )}
-              </div>
+                  </div>
+                ) : null
+              )}
             </div>
           ) : this.state.booksToRender === 'LIST-CATEGORY' ? (
             <div>
@@ -253,7 +257,10 @@ class Books extends React.Component {
               </div>
             </div>
           ) : (
-            <p>d–(^ ‿ ^ )z </p>
+            <p id="instruction-text">
+              Pick a filter above to learn more about the recent New York Times
+              Bestsellers!
+            </p>
           )}
         </div>
       </div>

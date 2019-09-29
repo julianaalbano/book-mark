@@ -4,11 +4,7 @@ import { Link } from 'react-router-dom';
 const Nav = props => {
   return (
     <div id="nav-container">
-      <Link to="/">
-        <p>Home</p>
-        {/* <img src="hh.png" id="nav-logo" /> */}
-      </Link>
-      <div id="search-bar">Search</div>
+      <h1 id="nav-title">New York Times Bestsellers</h1>
     </div>
   );
 };

@@ -18,6 +18,30 @@
   margin: 20px 400px;
 }
 
+#nav-title {
+  color: white;
+  text-align: center;
+  margin: 12px;
+  width: 100%;
+}
+
+#instruction-text {
+  text-align: center;
+  margin: 100px;
+}
+
+.filter-book-title {
+  margin-left: 20px;
+  text-align: center;
+  font-size: 15pt;
+  color: #363c3c;
+  font-weight: 900;
+}
+
+.book-details {
+  margin-top: 30px;
+}
+
 /* //// */
 
 #nav-container {
